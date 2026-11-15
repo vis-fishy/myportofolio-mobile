@@ -6,24 +6,20 @@ class MyHomePage extends StatelessWidget {
   final String npm = "2506544990";
   final String nama = "Elvis";
   final String kelas = "PBP B";
+  final Color authColor = Colors.greenAccent[700]!;
+
+  final List<ItemHomepage> auth = [
+    ItemHomepage("Login", Icons.login),
+    ItemHomepage("Logout", Icons.logout),
+  ];
 
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder),
     ItemHomepage("Tambah Proyek", Icons.add_circle),
-    ItemHomepage("Logout", Icons.logout),
+    ItemHomepage("Lihat Skills", Icons.folder),
+    ItemHomepage("Tambah Skills", Icons.add_circle),
   ];
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: const Text('MyPortfolio'),
-  //     ),
-  //     body: const Center(
-  //       child: Text('Halo dari MyPortfolio!'),
-  //     ),
-  //   );
-  // }
+  
   @override
   Widget build(BuildContext context) {
     // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
@@ -71,6 +67,19 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  
+                  GridView.count(
+                    padding: const EdgeInsets.all(20),
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    crossAxisCount: 2,
+                    childAspectRatio: 2.0,
+                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
+                    shrinkWrap: true,
+                    children: auth.map((ItemHomepage item) {
+                      return ItemCard(item, color: authColor);
+                    }).toList(),
+                  ),
 
                   // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
                   GridView.count(
@@ -78,11 +87,11 @@ class MyHomePage extends StatelessWidget {
                     padding: const EdgeInsets.all(20),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                    crossAxisCount: 3,
+                    crossAxisCount: 4,
                     // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
                     children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
+                      return ItemCard(item, color: Theme.of(context).colorScheme.secondary);
                     }).toList(),
                   ),
                 ],
@@ -137,14 +146,15 @@ class ItemHomepage {
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
+  final Color color;
 
-  const ItemCard(this.item, {super.key});
+  const ItemCard(this.item, {super.key, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       // Menggunakan warna sekunder dari skema tema aplikasi.
-      color: Theme.of(context).colorScheme.secondary,
+      color: color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
@@ -157,7 +167,7 @@ class ItemCard extends StatelessWidget {
             );
         },
         child: Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(2),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
