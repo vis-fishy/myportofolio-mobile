@@ -15,9 +15,9 @@ class MyHomePage extends StatelessWidget {
 
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder),
-    ItemHomepage.customColor("Tambah Proyek", Icons.add_circle),
+    ItemHomepage.colorTambah("Tambah Proyek", Icons.add_circle),
     ItemHomepage("Lihat Skills", Icons.folder),
-    ItemHomepage.customColor("Tambah Skills", Icons.add_circle),
+    ItemHomepage.colorTambah("Tambah Skills", Icons.add_circle),
   ];
   
   @override
@@ -144,8 +144,12 @@ class ItemHomepage {
   Color? color;
 
   ItemHomepage(this.name, this.icon);
-  ItemHomepage.customColor(this.name, this.icon)
+
+  ItemHomepage.colorTambah(this.name, this.icon)
     : color = Colors.redAccent[400];
+  
+  ItemHomepage.customColor(this.name, this.icon, this.color);
+
 }
 
 class ItemCard extends StatelessWidget {
