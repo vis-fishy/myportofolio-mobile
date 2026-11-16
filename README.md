@@ -1,17 +1,11 @@
-# myportofolio_mobile
+### AI Disclosure
+saya menggunakan Codex yang terintegrasi dengan vscode (gpt-6-luna). saya menggunakannya dalam aspek mencari cara untuk mengassign custom color untuk beberapa button, ada beberapa layout yang murni dari percobaan saya, dapat di check pada git diff.
 
-A new Flutter project.
+### Tugas 7
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. widget tree adalah struktur hierarki widget yang menunjukkan bagaimana setiap widget menjadi parent atau child dari widget lainnya untuk membentuk tampilan dan struktur aplikasi Flutter. Hubungan parent-child ini menentukan bagaimana widget disusun dan bagaimana informasi atau konfigurasi dapat diteruskan melalui struktur aplikasi.
+2. MaterialApp berfungsi sebagai kerangka utama aplikasi Flutter berbasis Material,Scaffold menyediakan struktur dasar halaman, AppBar digunakan untuk menampilkan bilah atas yang berisi judul aplikasi, Text digunakan untuk menampilkan teks, Padding berfungsi memberikan jarak di sekeliling widget, Column digunakan untuk menyusun  widget secara vertikal, Row digunakan untuk menyusun beberapa widget secara horizontal, SizedBox digunakan untuk memberikan jarak dengan ukuran tertentu antar-widget, Center digunakan untuk menempatkan widget anak di tengah area yang tersedia, GridView.count digunakan untuk menampilkan tombol-tombol dalam struktur grid, Card digunakan untuk membungkus informasi profil dalam bentuk kartu, Container digunakan sebagai pembungkus konten, InkWell digunakan untuk membuat area tombol dapat ditekan serta memberikan efek visual ketika terjadi interaksi, Icon digunakan untuk menampilkan ikon, SnackBar digunakan untuk menampilkan pesan singkat kepada pengguna setelah tombol ditekan.
+3. MaterialApp berfungsi sebagai kerangka utama aplikasi Flutter berbasis Material Design. Agar seluruh bagian aplikasi dapat menggunakan fitur dan pengaturan Material yang disediakan oleh MaterialApp
+4. StatelessWidget adalah widget yang tidak memiliki state yang dapat berubah selama widget tersebut digunakan, sedangkan StatefulWidget adalah widget yang memiliki state yang dapat berubah selama aplikasi berjalan. StatelessWidget digunakan untuk tampilan yang tidak memiliki state internal yang berubah, sedangkan StatefulWidget digunakan ketika terdapat state yang dapat berubah dan perubahan tersebut perlu ditampilkan pada UI.
+5. BuildContext digunakan Flutter untuk mengetahui hubungan sebuah widget dengan widget lain di dalam widget tree. Dalam proyek ini, BuildContext context digunakan oleh Theme.of(context) untuk mencari informasi Theme yang tersedia untuk widget tersebut di dalam widget tree dalam method build.
+6. Hot reload adalah fitur Flutter yang memungkinkan developer menerapkan perubahan kode ke aplikasi yang sedang berjalan tanpa harus menjalankan ulang aplikasi dari awal via flutter run -d chrome. hot reload cocok untuk perubahan kode yang tidak memerlukan inisialisasi ulang, hot restart digunakan ketika state atau proses awal aplikasi perlu diulang.
