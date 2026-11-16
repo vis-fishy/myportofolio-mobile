@@ -15,9 +15,9 @@ class MyHomePage extends StatelessWidget {
 
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder),
-    ItemHomepage("Tambah Proyek", Icons.add_circle),
+    ItemHomepage.customColor("Tambah Proyek", Icons.add_circle),
     ItemHomepage("Lihat Skills", Icons.folder),
-    ItemHomepage("Tambah Skills", Icons.add_circle),
+    ItemHomepage.customColor("Tambah Skills", Icons.add_circle),
   ];
   
   @override
@@ -69,11 +69,11 @@ class MyHomePage extends StatelessWidget {
                   ),
                   
                   GridView.count(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.only(left: 150, right: 150, top: 15, bottom: 10),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 2,
-                    childAspectRatio: 2.0,
+                    childAspectRatio: 1.0,
                     // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
                     children: auth.map((ItemHomepage item) {
@@ -84,10 +84,11 @@ class MyHomePage extends StatelessWidget {
                   // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
                   GridView.count(
                     primary: true,
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 10,
+                    padding: const EdgeInsets.all(10),
+                    crossAxisSpacing: 20,
                     mainAxisSpacing: 10,
-                    crossAxisCount: 4,
+                    childAspectRatio: 3,
+                    crossAxisCount: 2,
                     // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
                     children: items.map((ItemHomepage item) {
@@ -140,8 +141,11 @@ class InfoCard extends StatelessWidget {
 class ItemHomepage {
   final String name;
   final IconData icon;
+  Color? color;
 
   ItemHomepage(this.name, this.icon);
+  ItemHomepage.customColor(this.name, this.icon)
+    : color = Colors.redAccent[400];
 }
 
 class ItemCard extends StatelessWidget {
@@ -154,7 +158,7 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       // Menggunakan warna sekunder dari skema tema aplikasi.
-      color: color,
+      color: (item.color != null) ? item.color : color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
