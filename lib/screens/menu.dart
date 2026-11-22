@@ -18,8 +18,8 @@ class MyHomePage extends StatelessWidget {
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder),
     ItemHomepage.colorTambah("Tambah Proyek", Icons.add_circle),
-    ItemHomepage("Lihat Skills", Icons.folder),
-    ItemHomepage.colorTambah("Tambah Skills", Icons.add_circle),
+    ItemHomepage("Lihat Sertifikasi", Icons.folder),
+    ItemHomepage.colorTambah("Tambah Sertifikasi", Icons.add_circle),
   ];
   
   @override
