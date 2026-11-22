@@ -143,6 +143,15 @@ class _CertFormPageState extends State<CertFormPage> {
                       _verifLink = value!;
                     });
                   },
+                  validator: (String? value) {
+                    if(value != null){
+                      final uri = Uri.tryParse(value);
+                      if (uri == null || !uri.hasScheme || uri.host.isEmpty || (uri.scheme != 'http' && uri.scheme != 'https') ){
+                        return "Link tidak valid!";
+                      }
+                    }
+                    return null;
+                  },
                 ),
               ),
 
