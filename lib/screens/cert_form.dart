@@ -10,20 +10,25 @@ class CertFormPage extends StatefulWidget {
 
 class _CertFormPageState extends State<CertFormPage> {
   final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _yearController;
 
-  String _projectName = "";
-  String _description = "";
-  String _category = "Web Development"; // default
-  String _technologies = "";
-  String _projectLink = "";
+  String _courseName = "";
+  String _publisher = "";
+  String _verifLink = "";
+  String _yearPublished = "";
 
-  final List<String> _categories = [
-    'Web Development',
-    'Mobile Development',
-    'Machine Learning',
-    'Data Science',
-    'Other',
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _yearPublished = DateTime.now().year.toString();
+    _yearController = TextEditingController(text: _yearPublished);
+  }
+
+  @override
+  void dispose() {
+    _yearController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class _CertFormPageState extends State<CertFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Add Skill Form',
+            'Form Tambah Sertifikasi',
           ),
         ),
         backgroundColor: Colors.indigo,
@@ -44,115 +49,98 @@ class _CertFormPageState extends State<CertFormPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // === Project Name ===
+              // === Cert Name ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Nama Skill",
-                    labelText: "Nama Skill",
+                    hintText: "Nama Course",
+                    labelText: "Course",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _projectName = value!;
+                      _courseName = value!;
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Nama proyek tidak boleh kosong!";
+                      return "Nama course tidak boleh kosong!";
                     }
                     return null;
                   },
                 ),
               ),
 
-              // === Description ===
+              // === Publisher ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  maxLines: 5,
                   decoration: InputDecoration(
-                    hintText: "Deskripsi Proyek",
-                    labelText: "Deskripsi Proyek",
+                    hintText: "Nama Penerbit",
+                    labelText: "Penerbit",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _description = value!;
+                      _publisher = value!;
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Deskripsi proyek tidak boleh kosong!";
+                      return "Nama penerbit tidak boleh kosong!";
                     }
                     return null;
                   },
                 ),
               ),
 
-              // === Category ===
+              // === Year Published ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: DropdownButtonFormField<String>(
+                child: TextFormField(
+                  controller: _yearController,
+                  readOnly: true,
                   decoration: InputDecoration(
-                    labelText: "Kategori Proyek",
+                    hintText: "Tahun terbit",
+                    labelText: "Tahun",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  initialValue: _category,
-                  items: _categories
-                      .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category),
-                          ))
-                      .toList(),
-                  onChanged: (String? newValue) {
+                  onTap: () async {
+                    final pickedDate = await showDatePicker(
+                      context: context,
+                      firstDate: DateTime(1950),
+                      lastDate: DateTime.now(),
+                      initialDate: DateTime.now(),
+                    );
                     setState(() {
-                      _category = newValue!;
+                      _yearPublished = pickedDate!.year.toString();
+                      _yearController.text = _yearPublished;
                     });
                   },
                 ),
               ),
 
-              // === Technologies ===
+              // === Verification Link ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Contoh: Flutter, Django, Figma",
-                    labelText: "Teknologi yang Digunakan",
+                    hintText: "Link Verifikasi (opsional)",
+                    labelText: "Link Verifikasi",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _technologies = value!;
-                    });
-                  },
-                ),
-              ),
-
-              // === Project Link ===
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "URL Proyek (opsional)",
-                    labelText: "Tautan Proyek",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _projectLink = value!;
+                      _verifLink = value!;
                     });
                   },
                 ),
@@ -174,16 +162,16 @@ class _CertFormPageState extends State<CertFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Proyek berhasil ditambahkan!'),
+                              title: const Text('Sertifikasi berhasil ditambahkan!'),
                               content: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Nama Proyek: $_projectName'),
-                                    Text('Deskripsi: $_description'),
-                                    Text('Kategori: $_category'),
-                                    Text('Teknologi: $_technologies'),
-                                    Text('Tautan: $_projectLink'),
+                                    Text('Nama Course: $_courseName'),
+                                    Text('Penerbit: $_publisher'),
+                                    Text('Tahun Terbit: $_yearPublished'),
+                                    if (_verifLink.trim().isNotEmpty)
+                                      Text('Tautan: $_verifLink'),
                                   ],
                                 ),
                               ),
