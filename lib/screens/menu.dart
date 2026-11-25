@@ -44,11 +44,17 @@ class MyHomePageScreen extends StatelessWidget {
             // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
             Row(
               children: [
-                Expanded(child: InfoCard(title: 'NPM', content: npm)),
+                Expanded(
+                  child: InfoCard(title: 'NPM', content: npm),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: InfoCard(title: 'Name', content: nama)),
+                Expanded(
+                  child: InfoCard(title: 'Name', content: nama),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: InfoCard(title: 'Class', content: kelas)),
+                Expanded(
+                  child: InfoCard(title: 'Class', content: kelas),
+                ),
               ],
             ),
 
