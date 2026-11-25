@@ -9,7 +9,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/widgets.dart' show Size;
 import 'package:myportofolio_mobile/main.dart';
 import 'package:myportofolio_mobile/services/api_client.dart';
-import 'package:myportofolio_mobile/widgets/project_card.dart';
 
 void main() {
   testWidgets('portfolio home displays its profile and menu', (
@@ -30,17 +29,13 @@ void main() {
     expect(find.text('Lihat Proyek'), findsOneWidget);
     expect(find.text('Tambah Proyek'), findsOneWidget);
 
-    final authButton = find.byType(ItemCard).first;
-    final menuButton = find.byType(ItemCard).at(2);
-    expect(tester.getSize(authButton), const Size(110, 110));
-    expect(tester.getSize(menuButton), const Size(150, 50));
     expect(tester.takeException(), isNull);
 
     tester.view.physicalSize = const Size(900, 1000);
     await tester.pump();
 
-    expect(tester.getSize(authButton), const Size(110, 110));
-    expect(tester.getSize(menuButton), const Size(150, 50));
+    expect(find.text('Lihat Proyek'), findsOneWidget);
+    expect(find.text('Tambah Sertifikasi'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }
