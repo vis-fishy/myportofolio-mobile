@@ -7,7 +7,6 @@ import 'package:myportofolio_mobile/services/auth_state.dart';
 import 'package:provider/provider.dart';
 import 'package:myportofolio_mobile/screens/project_list_screen.dart';
 
-
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
   final Color color;
@@ -39,22 +38,18 @@ class ItemCard extends StatelessWidget {
             if (!context.mounted) return;
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => ProjectFormPage(),
-              ),
+              MaterialPageRoute(builder: (context) => ProjectFormPage()),
             );
-          } else if (item.name == "Tambah Sertifikasi"){
+          } else if (item.name == "Tambah Sertifikasi") {
             if (!await ensureLoggedIn(context)) return;
             if (!context.mounted) return;
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => CertFormPage()
-              ),
+              MaterialPageRoute(builder: (context) => CertFormPage()),
             );
-          } else if (item.name == "Logout"){
+          } else if (item.name == "Logout") {
             if (isLoggedIn) context.read<AuthState>().logout();
-          } else if (item.name == "Login"){
+          } else if (item.name == "Login") {
             if (!isLoggedIn) await ensureLoggedIn(context);
           } else if (item.name == "Lihat Proyek") {
             Navigator.push(
@@ -71,11 +66,7 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: Colors.white, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,

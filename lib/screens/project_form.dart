@@ -44,10 +44,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
         projectImageUrl: _projectImageUrl.trim(),
       );
 
-      await context.read<ApiClient>().createProject(
-        newProject,
-        token: token,
-      );
+      await context.read<ApiClient>().createProject(newProject, token: token);
 
       if (!mounted) return;
       await showDialog<void>(
@@ -92,11 +89,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add Project Form',
-          ),
-        ),
+        title: const Center(child: Text('Add Project Form')),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
@@ -253,8 +246,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(Colors.indigo),
+                      backgroundColor: WidgetStateProperty.all(Colors.indigo),
                     ),
                     onPressed: _isSubmitting ? null : _submit,
                     child: const Text(

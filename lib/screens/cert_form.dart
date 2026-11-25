@@ -34,11 +34,7 @@ class _CertFormPageState extends State<CertFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Form Tambah Sertifikasi',
-          ),
-        ),
+        title: const Center(child: Text('Form Tambah Sertifikasi')),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
@@ -144,9 +140,12 @@ class _CertFormPageState extends State<CertFormPage> {
                     });
                   },
                   validator: (String? value) {
-                    if(value != null){
+                    if (value != null) {
                       final uri = Uri.tryParse(value);
-                      if (uri == null || !uri.hasScheme || uri.host.isEmpty || (uri.scheme != 'http' && uri.scheme != 'https') ){
+                      if (uri == null ||
+                          !uri.hasScheme ||
+                          uri.host.isEmpty ||
+                          (uri.scheme != 'http' && uri.scheme != 'https')) {
                         return "Link tidak valid!";
                       }
                     }
@@ -162,8 +161,7 @@ class _CertFormPageState extends State<CertFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(Colors.indigo),
+                      backgroundColor: WidgetStateProperty.all(Colors.indigo),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -171,7 +169,9 @@ class _CertFormPageState extends State<CertFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Sertifikasi berhasil ditambahkan!'),
+                              title: const Text(
+                                'Sertifikasi berhasil ditambahkan!',
+                              ),
                               content: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

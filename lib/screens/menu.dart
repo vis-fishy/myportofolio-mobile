@@ -21,7 +21,7 @@ class MyHomePageScreen extends StatelessWidget {
     ItemHomepage("Lihat Sertifikasi", Icons.folder),
     ItemHomepage.colorTambah("Tambah Sertifikasi", Icons.add_circle),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
@@ -30,10 +30,7 @@ class MyHomePageScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -70,9 +67,14 @@ class MyHomePageScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   GridView.count(
-                    padding: const EdgeInsets.only(left: 150, right: 150, top: 15, bottom: 10),
+                    padding: const EdgeInsets.only(
+                      left: 150,
+                      right: 150,
+                      top: 15,
+                      bottom: 10,
+                    ),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 2,
@@ -95,7 +97,10 @@ class MyHomePageScreen extends StatelessWidget {
                     // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
                     children: items.map((ItemHomepage item) {
-                      return ItemCard(item, color: Theme.of(context).colorScheme.secondary);
+                      return ItemCard(
+                        item,
+                        color: Theme.of(context).colorScheme.secondary,
+                      );
                     }).toList(),
                   ),
                 ],
@@ -107,7 +112,6 @@ class MyHomePageScreen extends StatelessWidget {
     );
   }
 }
-
 
 class InfoCard extends StatelessWidget {
   // Kartu informasi yang menampilkan judul (title) dan isi (content).
@@ -128,10 +132,7 @@ class InfoCard extends StatelessWidget {
         // Menyusun teks title dan content secara vertikal.
         child: Column(
           children: [
-            Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8.0),
             Text(content),
           ],
@@ -150,8 +151,6 @@ class ItemHomepage {
 
   ItemHomepage.colorTambah(this.name, this.icon)
     : color = Colors.redAccent[400];
-  
+
   ItemHomepage.customColor(this.name, this.icon, this.color);
-
 }
-

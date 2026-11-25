@@ -72,7 +72,9 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
                 builder: (context, constraints) => SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight,
+                    ),
                     child: const Center(child: Text('No projects found.')),
                   ),
                 ),
