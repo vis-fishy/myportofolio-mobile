@@ -2,6 +2,10 @@ import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:myportofolio_mobile/screens/cert_form.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:provider/provider.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
 
 
 class ItemCard extends StatelessWidget {
@@ -12,13 +16,14 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLoggedIn = context.watch<AuthState>().isLoggedIn;
     return Material(
       // Menggunakan warna sekunder dari skema tema aplikasi.
       color: (item.color != null) ? item.color : color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
-        onTap: () {
+        onTap: () async {
           // Memunculkan SnackBar ketika diklik
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -30,17 +35,32 @@ class ItemCard extends StatelessWidget {
 
           // Navigate ke halaman yang sesuai
           if (item.name == "Tambah Proyek") {
+            if (!await ensureLoggedIn(context)) return;
+            if (!context.mounted) return;
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ProjectFormPage(),
               ),
             );
-          } else if(item.name == "Tambah Sertifikasi"){
+          } else if (item.name == "Tambah Sertifikasi"){
+            if (!await ensureLoggedIn(context)) return;
+            if (!context.mounted) return;
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => CertFormPage()
+              ),
+            );
+          } else if (item.name == "Logout"){
+            if (isLoggedIn) context.read<AuthState>().logout();
+          } else if (item.name == "Login"){
+            if (!isLoggedIn) await ensureLoggedIn(context);
+          } else if (item.name == "Lihat Proyek") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProjectListScreen(),
               ),
             );
           }
