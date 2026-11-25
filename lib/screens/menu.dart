@@ -36,7 +36,7 @@ class MyHomePageScreen extends StatelessWidget {
       ),
       drawer: const LeftDrawer(),
       // Body halaman utama dengan padding di sekelilingnya.
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,6 +56,7 @@ class MyHomePageScreen extends StatelessWidget {
             // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
             Center(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(top: 16.0),
@@ -68,40 +69,39 @@ class MyHomePageScreen extends StatelessWidget {
                     ),
                   ),
 
-                  GridView.count(
-                    padding: const EdgeInsets.only(
-                      left: 150,
-                      right: 150,
-                      top: 15,
-                      bottom: 10,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: auth.map((ItemHomepage item) {
+                        return SizedBox(
+                          width: 110,
+                          height: 110,
+                          child: ItemCard(item, color: authColor),
+                        );
+                      }).toList(),
                     ),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.0,
-                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
-                    shrinkWrap: true,
-                    children: auth.map((ItemHomepage item) {
-                      return ItemCard(item, color: authColor);
-                    }).toList(),
                   ),
 
-                  // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
-                  GridView.count(
-                    primary: true,
+                  Padding(
                     padding: const EdgeInsets.all(10),
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 3,
-                    crossAxisCount: 2,
-                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
-                    shrinkWrap: true,
-                    children: items.map((ItemHomepage item) {
-                      return ItemCard(
-                        item,
-                        color: Theme.of(context).colorScheme.secondary,
-                      );
-                    }).toList(),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 20,
+                      runSpacing: 10,
+                      children: items.map((ItemHomepage item) {
+                        return SizedBox(
+                          width: 200,
+                          height: 70,
+                          child: ItemCard(
+                            item,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ],
               ),
